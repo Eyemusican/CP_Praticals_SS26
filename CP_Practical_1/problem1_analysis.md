@@ -1,31 +1,33 @@
 # Problem 1 - Dynamic Array Basics
 
 ## Problem Summary
-Read N integers into a dynamic container (vector) and compute the maximum element, minimum element, and sum of all elements.
+Read N integers into a vector and find the maximum, minimum and sum.
+The goal was to use a dynamic container instead of a fixed array and
+get familiar with basic STL functions.
 
 ## Algorithm Explanation
-1. Read the value of N from input
-2. Create a vector of size N to store the integers
-3. Read N integers and store them in the vector
-4. Use `max_element()` to find the maximum value in the vector
-5. Use `min_element()` to find the minimum value in the vector
-6. Iterate through the vector to calculate the sum of all elements
-7. Print all three results
+1. Read N from input, reject if N <= 0
+2. Fill a vector of size N with user input
+3. Use `max_element()` to find the largest value
+4. Use `min_element()` to find the smallest value
+5. Sum all elements using `accumulate()`
+6. Print the three results
 
 ## Time Complexity Analysis
-- **O(n)** where n is the number of elements
-- Reading input: O(n)
-- Finding max element: O(n)
-- Finding min element: O(n)
-- Computing sum: O(n)
-- Overall: O(n) as all operations are linear
+- **Overall: O(n)** — three separate linear passes
+- Each STL call (`max_element`, `min_element`, `accumulate`) is O(n)
+- No nested loops so complexity stays linear
 
 ## Space Complexity Analysis
-- **O(n)** for storing N integers in the vector
-- No additional space proportional to input size is used
+- **O(n)** — vector holds all N integers
+- STL functions work in-place, no extra memory used
 
 ## Reflection
-This problem introduced me to using vectors in C++, which are dynamic arrays that can grow or shrink in size. I learned how to use STL functions like `max_element()` and `min_element()` which make finding extremes very efficient and clean. Using vectors is much better than traditional arrays as they handle memory management automatically and provide useful methods for common operations.
+I used STL functions instead of manual loops to keep the code clean.
+I hadn't used `accumulate()` before this. I could have written a for 
+loop for the sum but keeping everything STL felt more consistent. I also 
+noticed I'm doing three passes over the vector instead of one, which is 
+still O(n) but a single loop would be tighter. I kept it this way since 
+it was more readable for me at this stage.
 
-
-![alt text](image.png)
+![CP_Practical_1/output_screenshot/image.png](output_screenshot/image.png)

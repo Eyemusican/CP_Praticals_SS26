@@ -1,39 +1,44 @@
 # Problem 8 - Subset Generation
 
 ## Problem Summary
-Given a set of N numbers, generate and print all possible subsets (including empty set and the full set) using bitmask technique.
+Given N numbers, generate and print all 2^N possible subsets including
+the empty set. The goal is to use bitmask technique instead of
+recursion to enumerate every combination.
 
 ## Algorithm Explanation
-The bitmask technique represents each subset as a binary number:
-1. For N elements, there are 2^N possible subsets
-2. Iterate through all numbers from 0 to 2^N - 1
-3. Each number represents a unique subset:
-   - If bit i is set (1) in the number, include element i in the subset
-   - If bit i is not set (0), exclude element i
-4. For each mask value, check each bit position using bitwise AND operation `(mask & (1 << i))`
-5. Print elements corresponding to set bits
+1. Read N integers into a vector
+2. Calculate total subsets as `1 << n` (which is 2^n)
+3. Loop mask from 0 to totalSubsets - 1
+4. For each mask, loop through all bit positions 0 to n-1
+   - Check if bit i is set using `mask & (1 << i)`
+   - If set, include arr[i] in current subset
+5. Print each subset in {} format
 
 Example for {1, 2, 3}:
-- mask=0 (000₂) → {} (empty set)
-- mask=1 (001₂) → {1}
-- mask=2 (010₂) → {2}
-- mask=3 (011₂) → {1, 2}
-- mask=4 (100₂) → {3}
-- etc.
+- mask=0 (000) → {}
+- mask=1 (001) → {1}
+- mask=2 (010) → {2}
+- mask=3 (011) → {1 2}
+- mask=4 (100) → {3} and so on
 
 ## Time Complexity Analysis
-- **O(n * 2^n)** where n is the number of elements
-- Total subsets: 2^n
-- For each subset, we check n bits to determine which elements to include
-- Overall: O(n * 2^n)
+- **Overall: O(n * 2^n)**
+- 2^n subsets total
+- Each subset takes O(n) to build by checking all bit positions
 
 ## Space Complexity Analysis
-- **O(n)** for storing the input array
-- No additional space proportional to number of subsets (we generate them on-the-fly)
-- Overall: O(n)
+- **O(n)** — just the input array
+- Subsets are printed on the fly, nothing stored
 
 ## Reflection
-This problem introduced me to the powerful bitmask technique for subset generation. The insight that each subset can be uniquely represented by a binary number where each bit corresponds to including/excluding an element is elegant. Using bitwise operations like left shift `(1 << i)` and AND `(mask & bit)` makes this very efficient. This technique is fundamental in competitive programming for problems involving combinations, subsets, and state representation. It's much cleaner than recursive backtracking for generating all subsets.
+I had heard of bitmasks before but never actually used them for
+something like this. The idea of treating each bit in a number as an
+include or exclude flag for an element was new to me. I went through
+a few examples by hand first — writing out mask=0,1,2,3 in binary and
+checking which elements would be included — before I trusted the logic
+enough to code it. What I liked was how clean it ended up being, just
+two nested loops and a bitwise AND check. Compared to writing a
+recursive solution this felt much more compact once I understood what
+the bits were actually representing.
 
-
-![alt text](image-7.png)
+![CP_Practical_1/output_screenshot/image-7.png](output_screenshot/image-7.png)

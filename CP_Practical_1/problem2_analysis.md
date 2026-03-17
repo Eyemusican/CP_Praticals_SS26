@@ -1,27 +1,32 @@
 # Problem 2 - Reverse the Array
 
 ## Problem Summary
-Given N integers stored in an array, print all elements in reverse order from last to first.
+Given N integers stored in a vector, reverse the order and print them
+from last to first. Simple problem but good practice for working with
+vectors and STL functions.
 
 ## Algorithm Explanation
-1. Read the value of N from input
-2. Create a vector of size N to store the integers
-3. Read N integers and store them in the vector
-4. Traverse the vector from the last index (n-1) to the first index (0) using a decrementing loop
-5. Print each element during the reverse traversal
+1. Read N from input, reject if N <= 0
+2. Fill a vector of size N with user input
+3. Call `reverse()` to reverse the vector in place
+4. Print all elements using a forward loop
 
 ## Time Complexity Analysis
-- **O(n)** where n is the number of elements
-- Reading input: O(n)
-- Printing in reverse: O(n)
-- Overall: O(n)
+- **Overall: O(n)**
+- `reverse()` is O(n) — swaps elements from both ends moving inward
+- Printing is O(n)
 
 ## Space Complexity Analysis
-- **O(n)** for storing N integers in the vector
-- No additional space is required for reversal as we're just printing in reverse order
+- **O(n)** — vector holds all N integers
+- `reverse()` works in place, no extra memory needed
 
 ## Reflection
-This problem taught me about reverse traversal of arrays using indices. Instead of actually reversing the array in memory (which would take O(n) time and potentially modify the original data), I simply iterated from the end to the beginning. This is more efficient when you only need to process elements in reverse order once. I could also use `reverse()` function or reverse iterators, but simple index-based traversal is clearest for this problem.
+I used `std::reverse()` here instead of looping backwards manually.
+The vector gets flipped in memory first then I just print it forward.
+I could have skipped the reverse call and looped from n-1 to 0 instead,
+which would avoid modifying the original data — but since I didn't need
+the original order after this point, reversing in place was simpler.
+It also made the print loop cleaner since it's just a standard
+forward loop.
 
-
-![alt text](image-1.png)
+![CP_Practical_1/output_screenshot/image-1.png](output_screenshot/image-1.png)

@@ -1,31 +1,38 @@
 # Problem 5 - Balanced Line Problem
 
 ## Problem Summary
-Simulate a line of people where operations can add or remove people from both the front and back of the line. After each operation, display the current state of the line.
+Simulate a line where people can join or leave from either end.
+After each operation print the current state of the line. The focus
+is on using a deque to handle both ends efficiently.
 
 ## Algorithm Explanation
-1. Create a deque to represent the line of people
-2. Read the number of operations to perform
+1. Create a deque to represent the line
+2. Read number of operations
 3. For each operation:
-   - **push_front x**: Add person x to the front of the line using `push_front()`
-   - **push_back x**: Add person x to the back of the line using `push_back()`
-   - **pop_front**: Remove person from the front using `pop_front()` (if not empty)
-   - **pop_back**: Remove person from the back using `pop_back()` (if not empty)
-4. After each operation, print the current contents of the line
-5. Handle edge cases where pop operations are called on empty deque
+   - 'a' → `push_front(x)` — add to front
+   - 'b' → `push_back(x)` — add to back
+   - 'c' → `pop_front()` — remove from front if not empty
+   - 'd' → `pop_back()` — remove from back if not empty
+4. After each operation call printLine() to show current state
+5. printLine() handles empty deque separately
 
 ## Time Complexity Analysis
-- **O(n * m)** where n is the number of operations and m is the average size of deque
-- Each push/pop operation: O(1)
-- Printing the deque after each operation: O(m) where m is current size
-- Overall: O(n * m) for n operations
+- **Overall: O(n * m)** where n is operations, m is current deque size
+- Each push/pop: O(1)
+- Printing after each operation: O(m)
 
 ## Space Complexity Analysis
-- **O(k)** where k is the maximum size of the deque at any point
-- Space grows and shrinks with operations
+- **O(k)** where k is the maximum deque size at any point
+- Grows and shrinks as operations are performed
 
 ## Reflection
-This problem demonstrated the power of deque (double-ended queue) for problems requiring efficient insertion and deletion at both ends. Unlike vectors which only provide efficient operations at the back, or queues which only allow front removal, deques support O(1) operations at both ends. This makes them ideal for problems like this where the line can be modified from either direction. I learned that deques are implemented as dynamic arrays with blocks, allowing efficient operations at both ends.
+I had used queues before but always just from one end. This was the
+first time I actually needed both ends at once. I initially thought
+about using two stacks to simulate this but then realised deque handles
+it natively with O(1) operations on both sides. The empty check before
+pop operations caught me out once during testing — I forgot it and got
+undefined behaviour on an empty deque. Adding that guard in the if
+conditions fixed it. The separate printLine() function also kept
+main() clean which I liked.
 
-
-![alt text](image-4.png)
+![CP_Practical_1/output_screenshot/image-4.png](output_screenshot/image-4.png)

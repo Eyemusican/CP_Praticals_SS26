@@ -1,32 +1,36 @@
 # Problem 4 - Sliding Window Maximum
 
 ## Problem Summary
-Given an array of N integers and a window size K, find the maximum element in every consecutive window of size K as it slides from left to right through the array.
+Given an array of N integers and a window size K, find the maximum
+in every consecutive window of size K as it slides across the array.
+The trick is doing this without rechecking every element in each window.
 
 ## Algorithm Explanation
-1. Use a deque to store indices of array elements in decreasing order of their values
-2. For each element in the array:
-   - Remove indices from front if they are outside the current window (i - k)
-   - Remove indices from back if their corresponding values are smaller than current element (maintaining decreasing order)
-   - Add current element's index to the back
-   - If we've processed at least k elements, the front of deque contains the index of maximum element in current window
-3. Store and print all window maximums
-
-The deque maintains indices of potentially useful elements in decreasing order of values, ensuring the front always has the maximum.
+1. Use a deque to store indices of elements in decreasing order of value
+2. For each element:
+   - Pop from front if that index is outside the current window (i - k)
+   - Pop from back while the back element is smaller than current element
+   - Push current index to back
+   - Once i >= k-1, print arr[dq.front()] as the current window max
+3. Front of deque always holds the index of the current maximum
 
 ## Time Complexity Analysis
-- **O(n)** where n is the number of elements
-- Each element is added to deque once: O(n)
-- Each element is removed from deque at most once: O(n)
-- Overall: O(n) - linear time for n windows
+- **Overall: O(n)**
+- Each index is pushed and popped from the deque at most once
+- No nested loops despite looking like one at first glance
 
 ## Space Complexity Analysis
-- **O(k)** for the deque storing at most k indices at any time
-- **O(n-k+1)** for storing the result
-- Overall: O(n)
+- **O(k)** — deque holds at most k indices at any time
+- No result array used, maximums printed directly
 
 ## Reflection
-This problem helped me understand how a deque can maintain a sliding window maximum efficiently. Initially I considered a brute force approach O(n*k) that would check all k elements in each window, but using a deque the complexity reduced to O(n). The key insight is maintaining a monotonic decreasing deque by removing smaller elements from the back - they can never be the maximum while a larger element exists before them in the window. This is a classic optimization technique for sliding window problems.
+I tried brute force first — checking all k elements per window — which
+worked but was O(n*k) and felt wasteful. The deque approach took me a
+bit to wrap my head around. The key thing I kept getting wrong early on
+was the removal condition at the back — you remove elements smaller than
+the current one because they can never be the max while a bigger element
+is still in the window. Once that made sense the rest followed. Printing
+directly instead of storing results also kept the space usage down to
+just O(k) for the deque.
 
-
-![alt text](image-3.png)
+![CP_Practical_1/output_screenshot/image-3.png](output_screenshot/image-3.png)
