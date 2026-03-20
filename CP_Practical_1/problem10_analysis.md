@@ -54,4 +54,4 @@ The DP approach uses the principle of optimal substructure: the count for n elem
 
 This problem taught me the importance of choosing the right algorithm based on constraints. The bitmask approach is straightforward and works for small N, demonstrating the technique clearly. However, the DP approach is far superior for larger inputs, showcasing how dynamic programming can reduce exponential complexity to polynomial by avoiding redundant calculations. I learned that subset sum is a classic DP problem where we build solutions incrementally. The key insight is that each element either contributes to the sum or doesn't, and we can count both possibilities using previous results.
 
-![alt text](image-9.png)
+![CP_Practicals_1/CP_Practical_1/output_screenshot/image-9.png](output_screenshot/image-9.png)
